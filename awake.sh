@@ -4,15 +4,26 @@
 # Disables sleep (including lid-closed sleep) while this script runs,
 # then restores your previous sleep settings when you stop it (Ctrl+C).
 #
-# Usage: ./awake.sh
+# Setup (one time):
+#   chmod +x awake.sh
+#
+# Usage:
+#   ./awake.sh
+#   Enter your password when sudo asks, then leave it running.
+#   Press Ctrl+C to stop and restore your normal sleep settings.
 #
 # Notes:
 # - Requires sudo, because "pmset -a disablesleep 1" needs admin rights.
+# - Only uses tools built into macOS (pmset, caffeinate), so there is
+#   nothing else to install.
 # - This lets the machine stay fully awake with the lid closed, as long
 #   as it's plugged into power (on battery, macOS may still sleep on
 #   lid-close for safety — using an external display/dock is one way
 #   to make lid-closed operation reliable, but that's independent of
 #   this script).
+# - Stop it with Ctrl+C rather than closing the terminal window. If the
+#   window is closed, the restore step may not run. To fix that, run:
+#     sudo pmset -a disablesleep 0
 
 set -u
 
